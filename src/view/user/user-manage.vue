@@ -14,7 +14,7 @@
 <script>
 import { getUserList } from '@/api/user'
 export default {
-  data() {
+  data () {
     return {
       param: {
         PageIndex: 1,
@@ -22,70 +22,70 @@ export default {
       },
       columns12: [
         {
-          title: "Name",
-          slot: "name"
+          title: 'Name',
+          slot: 'name'
         },
         {
-          title: "Age",
-          key: "age"
+          title: 'Age',
+          key: 'age'
         },
         {
-          title: "Address",
-          key: "address"
+          title: 'Address',
+          key: 'address'
         },
         {
-          title: "Action",
-          slot: "action",
+          title: 'Action',
+          slot: 'action',
           width: 150,
-          align: "center"
+          align: 'center'
         }
       ],
       data6: [
         {
-          name: "John Brown",
+          name: 'John Brown',
           age: 18,
-          address: "New York No. 1 Lake Park"
+          address: 'New York No. 1 Lake Park'
         },
         {
-          name: "Jim Green",
+          name: 'Jim Green',
           age: 24,
-          address: "London No. 1 Lake Park"
+          address: 'London No. 1 Lake Park'
         },
         {
-          name: "Joe Black",
+          name: 'Joe Black',
           age: 30,
-          address: "Sydney No. 1 Lake Park"
+          address: 'Sydney No. 1 Lake Park'
         },
         {
-          name: "Jon Snow",
+          name: 'Jon Snow',
           age: 26,
-          address: "Ottawa No. 2 Lake Park"
+          address: 'Ottawa No. 2 Lake Park'
         }
       ]
-    };
+    }
   },
   methods: {
-    getUserList() {
+    getUserList () {
       getUserList(this.param)
-        .then(res =>{
+        .then(res => {
           console.log(res)
         })
         .catch(err => {
 
         })
     },
-    show(index) {
+    show (index) {
       this.$Modal.info({
-        title: "User Info",
+        title: 'User Info',
         content: `Name：${this.data6[index].name}<br>Age：${this.data6[index].age}<br>Address：${this.data6[index].address}`
-      });
+      })
     },
-    remove(index) {
-      this.data6.splice(index, 1);
+    remove (index) {
+      this.data6.splice(index, 1)
     }
   },
-  mounted() {
-    this.getUserList();
+  mounted () {
+    this.getUserList()
   }
-};
+}
 </script>

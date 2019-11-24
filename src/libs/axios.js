@@ -3,7 +3,7 @@ import qs from 'qs'
 import store from '@/store'
 import { Notice } from 'iview'
 import { getToken } from '@/libs/util'
-axios.defaults.headers['Content-Type']='application/x-www-form-urlencoded'
+axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded'
 // import { Spin } from 'iview'
 
 class HttpRequest {
@@ -37,8 +37,8 @@ class HttpRequest {
       if (config.data) {
         config.data.token = getToken()
       }
-      if(config.method === 'post') {
-        config.data = qs.stringify(config.data);
+      if (config.method === 'post') {
+        config.data = qs.stringify(config.data)
       }
       return config
     }, error => {
@@ -53,12 +53,12 @@ class HttpRequest {
       } else if (data.ResponseID == 1) {
         Notice.error({
           title: data.Message
-        });
+        })
         return Promise.reject(data)
       } else {
         Notice.error({
           title: data.Message
-        });
+        })
         return Promise.reject(data)
       }
     }, error => {
