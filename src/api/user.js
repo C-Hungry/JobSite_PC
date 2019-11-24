@@ -6,7 +6,15 @@ export const login = ({ userName, password }) => {
     password
   }
   return axios.request({
-    url: 'login',
+    url: '/api/User/Login',
+    data,
+    method: 'post'
+  })
+}
+
+export const getUserList = (data) => {
+  return axios.request({
+    url: '/api/User/UserList',
     data,
     method: 'post'
   })

@@ -81,7 +81,7 @@ export default {
           userName,
           password
         }).then(res => {
-          const data = res.data
+          const data = res.Data
           commit('setToken', data.token)
           resolve()
         }).catch(err => {

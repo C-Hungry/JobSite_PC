@@ -1,16 +1,10 @@
 import axios from 'axios'
+import qs from 'qs'
 import store from '@/store'
+import { Notice } from 'iview'
+import { getToken } from '@/libs/util'
+axios.defaults.headers['Content-Type']='application/x-www-form-urlencoded'
 // import { Spin } from 'iview'
-const addErrorLog = errorInfo => {
-  const { statusText, status, request: { responseURL } } = errorInfo
-  let info = {
-    type: 'ajax',
-    code: status,
-    mes: statusText,
-    url: responseURL
-  }
-  if (!responseURL.includes('save_error_logger')) store.dispatch('addErrorLog', info)
-}
 
 class HttpRequest {
   constructor (baseUrl = baseURL) {
@@ -40,6 +34,12 @@ class HttpRequest {
         // Spin.show() // 不建议开启，因为界面不友好
       }
       this.queue[url] = true
+      if (config.data) {
+        config.data.token = getToken()
+      }
+      if(config.method === 'post') {
+        config.data = qs.stringify(config.data);
+      }
       return config
     }, error => {
       return Promise.reject(error)
@@ -48,7 +48,19 @@ class HttpRequest {
     instance.interceptors.response.use(res => {
       this.destroy(url)
       const { data, status } = res
-      return { data, status }
+      if (data.ResponseID == 0) {
+        return data
+      } else if (data.ResponseID == 1) {
+        Notice.error({
+          title: data.Message
+        });
+        return Promise.reject(data)
+      } else {
+        Notice.error({
+          title: data.Message
+        });
+        return Promise.reject(data)
+      }
     }, error => {
       this.destroy(url)
       let errorInfo = error.response
@@ -60,7 +72,6 @@ class HttpRequest {
           request: { responseURL: config.url }
         }
       }
-      addErrorLog(errorInfo)
       return Promise.reject(error)
     })
   }

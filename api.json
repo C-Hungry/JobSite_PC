@@ -1,0 +1,499 @@
+{
+	"info": {
+		"_postman_id": "dd22ad65-353e-42d5-b0da-6f7acf712f30",
+		"name": "Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "登录",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"UserName\":\"admin\",\n\t\"Password\":\"111111\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/User/Login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"User",
+						"Login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "添加用户",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"{{token}}\",\n\t\"UserName\":\"test\",\n\t\"RealName\":\"小李\",\n\t\"Phone\":\"13211111111\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/User/UserAdd",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"User",
+						"UserAdd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "修改用户",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"{{token}}\",\n\t\"Id\":3,\n\t\"UserName\":\"test\",\n\t\"RealName\":\"小张\",\n\t\"Phone\":\"13211111111\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/User/UserUpdate",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"User",
+						"UserUpdate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "用户列表",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"{{token}}\",\n\t\"PageIndex\":1,\n\t\"PageSize\":15\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/User/UserList",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"User",
+						"UserList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "用户删除",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"{{token}}\",\n\t\"Id\":2\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/User/UserDelete",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"User",
+						"UserDelete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "修改密码",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"{{token}}\",\n\t\"Password\":\"123456\",\n\t\"NewPassword\":\"111111\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/User/UserUpdatePassword",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"User",
+						"UserUpdatePassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "图片上传",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"type": "file",
+							"src": ""
+						},
+						{
+							"key": "",
+							"type": "file",
+							"src": ""
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/UploadFile/UploadImage",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"UploadFile",
+						"UploadImage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "岗位关键词添加",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"{{token}}\",\n\t\"Name\":\"包吃住\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/Job/JobKeyWordsAdd",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Job",
+						"JobKeyWordsAdd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "岗位关键词列表",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"{{token}}\",\n\t\"PageIndex\":1,\n\t\"PageSize\":15\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/Job/JobKeyWordsList",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Job",
+						"JobKeyWordsList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "岗位关键词删除",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"{{token}}\",\n\t\"Id\":1\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/Job/JobKeyWordsDelete",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Job",
+						"JobKeyWordsDelete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "岗位添加",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"{{token}}\",\n\t\"Title\":\"盐城维信小时工\",\n\t\"SalaryByFactory\":\"16\",\n\t\"Images\":[],\n\t\"Allowance\":\"\t牛职补足至：19.2元/小时  自 2019年11月23日 起 入职即可领取  补贴时长：长期补 备注：不满150个小时无补贴\",\n\t\"SalaryDesc\":\"1、工资发放日期：东山车间每月15号发上月工资（26-25号）\",\n\t\"EmployCondition\":\"1、年龄及性别比例：18-38周岁，男女不限\",\n\t\"JobDesc\":\"1、班制及优势：两班制，8：00-20:00，每天计时10.5个小时，恒温车间，有坐有站，站班居多\",\n\t\"CompanyDesc\":\"维信电子（MFLEX）,1984年创立于美国加州，全球领先的柔性电路板设计、制造、组装的专业制造商。产品应用于电子、医疗、汽车等领域，是全球少数能针对特定客户提供特定设计和一整套解决方案的优质柔性线路板生产制造商之一\",\n\t\"KeyWords\":\"吃住在厂,工时高,18-38岁,牛职保障\",\n\t\"TotalSalary\":\"4000-6000\",\n\t\"CompanyName\":\"维信电子\",\n\t\"CompanyAddress\":\"盐城市高新区盐都渎路大桥西东山产业园\",\n\t\"RecommendNumber\":1\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/Job/JobAdd",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Job",
+						"JobAdd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "岗位修改",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"{{token}}\",\n\t\"Id\":1,\n\t\"Title\":\"盐城维信稳定小时工\",\n\t\"SalaryByFactory\":16,\n\t\"Images\":[],\n\t\"Allowance\":\"\t牛职补足至：19.2元/小时  自 2019年11月23日 起 入职即可领取  补贴时长：长期补 备注：不满150个小时无补贴\",\n\t\"SalaryDesc\":\"1、工资发放日期：东山车间每月15号发上月工资（26-25号）\",\n\t\"EmployCondition\":\"1、年龄及性别比例：18-38周岁，男女不限\",\n\t\"JobDesc\":\"1、班制及优势：两班制，8：00-20:00，每天计时10.5个小时，恒温车间，有坐有站，站班居多\",\n\t\"CompanyDesc\":\"维信电子（MFLEX）,1984年创立于美国加州，全球领先的柔性电路板设计、制造、组装的专业制造商。产品应用于电子、医疗、汽车等领域，是全球少数能针对特定客户提供特定设计和一整套解决方案的优质柔性线路板生产制造商之一\",\n\t\"KeyWords\":\"吃住在厂,工时高,18-38岁,牛职保障\",\n\t\"TotalSalary\":\"4000-6000\",\n\t\"CompanyName\":\"维信电子\",\n\t\"CompanyAddress\":\"盐城市高新区盐都渎路大桥西东山产业园\",\n\t\"RecommendNumber\":1\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/Job/JobUpdate",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Job",
+						"JobUpdate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "岗位查看",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"{{token}}\",\n\t\"Id\":1\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/Job/JobInfo",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Job",
+						"JobInfo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "岗位删除",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"{{token}}\",\n\t\"Id\":1\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/Job/JobDelete",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Job",
+						"JobDelete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "岗位列表",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"{{token}}\",\n\t\"PageIndex\":1,\n\t\"PageSize\":15,\n\t\"Keys\":\"\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/Job/JobList",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Job",
+						"JobList"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "f315d14f-8d32-4c6b-bd8b-be74e257ab7c",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "4fc3ecf6-e453-4757-acd8-ec73fa3847c3",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "abe7e470-52f3-478b-8902-74169f7afb2f",
+			"key": "url",
+			"value": "http://192.168.1.234:600",
+			"type": "string"
+		},
+		{
+			"id": "020618a5-bb09-4310-b991-131667cbb229",
+			"key": "token",
+			"value": "7ea7f41087794f1292881f419810de30",
+			"type": "string"
+		}
+	]
+}

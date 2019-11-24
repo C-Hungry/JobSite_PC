@@ -12,9 +12,14 @@
   </div>
 </template>
 <script>
+import { getUserList } from '@/api/user'
 export default {
   data() {
     return {
+      param: {
+        PageIndex: 1,
+	      PageSize: 15
+      },
       columns12: [
         {
           title: "Name",
@@ -60,6 +65,15 @@ export default {
     };
   },
   methods: {
+    getUserList() {
+      getUserList(this.param)
+        .then(res =>{
+          console.log(res)
+        })
+        .catch(err => {
+
+        })
+    },
     show(index) {
       this.$Modal.info({
         title: "User Info",
@@ -69,6 +83,9 @@ export default {
     remove(index) {
       this.data6.splice(index, 1);
     }
+  },
+  mounted() {
+    this.getUserList();
   }
 };
 </script>
