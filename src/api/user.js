@@ -1,10 +1,7 @@
 import axios from '@/libs/api.request'
 
-export const login = ({ userName, password }) => {
-  const data = {
-    userName,
-    password
-  }
+// 登录
+export const login = (data) => {
   return axios.request({
     url: '/api/User/Login',
     data,
@@ -12,9 +9,37 @@ export const login = ({ userName, password }) => {
   })
 }
 
+// 获取用户列表
 export const getUserList = (data) => {
   return axios.request({
     url: '/api/User/UserList',
+    data,
+    method: 'post'
+  })
+}
+
+// 新增用户
+export const addUser = (data) => {
+  return axios.request({
+    url: '/api/User/UserAdd',
+    data,
+    method: 'post'
+  })
+}
+
+// 修改用户
+export const updateUser = (data) => {
+  return axios.request({
+    url: '/api/User/UserUpdate',
+    data,
+    method: 'post'
+  })
+}
+
+// 删除用户
+export const deleteUser = (data) => {
+  return axios.request({
+    url: '/api/User/UserDelete',
     data,
     method: 'post'
   })

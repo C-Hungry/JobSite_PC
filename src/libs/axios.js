@@ -49,7 +49,7 @@ class HttpRequest {
       this.destroy(url)
       const { data, status } = res
       if (data.ResponseID == 0) {
-        return data
+        return data.Data
       } else if (data.ResponseID == 1) {
         Notice.error({
           title: data.Message

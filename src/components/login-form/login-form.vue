@@ -1,21 +1,21 @@
 <template>
-  <Form ref="loginForm" :model="form" :rules="rules" @keydown.enter.native="handleSubmit">
+  <Form ref="loginForm" :model="form" :rules="rules">
     <FormItem prop="userName">
-      <Input v-model="form.userName" placeholder="请输入用户名">
+      <Input v-model="form.userName" placeholder="请输入用户名" @keydown.enter.native="handleSubmit">
         <span slot="prepend">
           <Icon :size="16" type="ios-person"></Icon>
         </span>
       </Input>
     </FormItem>
     <FormItem prop="password">
-      <Input type="password" v-model="form.password" placeholder="请输入密码">
+      <Input type="password" v-model="form.password" placeholder="请输入密码" @keydown.enter.native="handleSubmit">
         <span slot="prepend">
           <Icon :size="14" type="md-lock"></Icon>
         </span>
       </Input>
     </FormItem>
     <FormItem>
-      <Button @click="handleSubmit" type="primary" long>登录</Button>
+      <Button @click="handleSubmit" long type="primary">登录</Button>
     </FormItem>
   </Form>
 </template>
