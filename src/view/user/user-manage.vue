@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="search-box">
-      <Button class="fr" type="warning" icon="md-add" @click="add()">新增用户</Button>
-      <Button class="fr mr5" type="primary" icon="md-sync" @click="refresh()">刷新列表</Button>
+      <Button class="mr5" type="primary" icon="md-sync" @click="refresh()">刷新列表</Button>
+      <Button type="warning" icon="md-add" @click="add()">新增用户</Button>
     </div>
     <Table border :columns="columns" :data="userList" :loading="loading">
       <template slot-scope="{ row }" slot="action">
@@ -73,11 +73,11 @@ export default {
           key: 'Phone'
         },
         {
-          title: '新增日期',
+          title: '创建时间',
           key: 'DateAdded'
         },
         {
-          title: '更新日期',
+          title: '更新时间',
           key: 'DateModify'
         },
         {
