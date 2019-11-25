@@ -9,6 +9,15 @@ export const login = (data) => {
   })
 }
 
+// 修改密码
+export const updateUserPassword = (data) => {
+  return axios.request({
+    url: '/api/User/UserUpdatePassword',
+    data,
+    method: 'post'
+  })
+}
+
 // 获取用户列表
 export const getUserList = (data) => {
   return axios.request({

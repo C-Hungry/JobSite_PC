@@ -1,6 +1,5 @@
 import {
   login,
-  logout,
   getUserInfo,
   getMessage,
   getContentByMsgId,
@@ -9,11 +8,11 @@ import {
   restoreTrash,
   getUnreadCount
 } from '@/api/user'
-import { setToken, getToken } from '@/libs/util'
+import { setToken, getToken, setUserName, getUserName } from '@/libs/util'
 
 export default {
   state: {
-    userName: '',
+    userName: getUserName(),
     userId: '',
     avatarImgPath: '',
     token: getToken(),
@@ -34,6 +33,7 @@ export default {
     },
     setUserName (state, name) {
       state.userName = name
+      setUserName(name)
     },
     setAccess (state, access) {
       state.access = access
@@ -82,6 +82,7 @@ export default {
           password
         }).then(data => {
           commit('setToken', data.token)
+          commit('setUserName', data.UserName)
           resolve()
         }).catch(err => {
           reject(err)

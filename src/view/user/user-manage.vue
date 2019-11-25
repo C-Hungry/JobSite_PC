@@ -20,13 +20,12 @@
     </Table>
     <Page class="mt15 fr" :total="total" :current="param.PageIndex" @on-change="onPageIndexChange"></Page>
     <Modal
-      draggable
       v-model="isShowEditModal"
       :title="`${modalType == 'add' ? '新增' : '编辑'}用户`"
       @on-ok="modifyConfirm"
-      width="380px"
+      width="400px"
     >
-      <Form class="mt20 pr50" ref="formCustom" :model="formData" :rules="formRule" :label-width="140">
+      <Form class="mt20 pr50" ref="formCustom" :model="formData" :rules="formRule" :label-width="120">
         <FormItem v-if="modalType == 'add'" label="用户名：" prop="UserName">
           <Input type="text" v-model="formData.UserName"></Input>
         </FormItem>
@@ -126,6 +125,7 @@ export default {
         Phone: ''
       }
       this.modalType = 'add'
+      this.$refs['formCustom'].resetFields()
       this.isShowEditModal = true
     },
     // 编辑
@@ -137,6 +137,7 @@ export default {
         Phone: item.Phone
       }
       this.modalType = 'update'
+      this.$refs['formCustom'].resetFields()
       this.isShowEditModal = true
     },
     // 确定编辑
