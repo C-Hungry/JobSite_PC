@@ -2,6 +2,7 @@
   <div>
     <div class="search-box">
       <Button class="fr" type="warning" icon="md-add" @click="add()">新增用户</Button>
+      <Button class="fr mr5" type="primary" icon="md-sync" @click="refresh()">刷新列表</Button>
     </div>
     <Table border :columns="columns" :data="userList" :loading="loading">
       <template slot-scope="{ row }" slot="action">
@@ -19,6 +20,7 @@
     </Table>
     <Page class="mt15 fr" :total="total" :current="param.PageIndex" @on-change="onPageIndexChange"></Page>
     <Modal
+      draggable
       v-model="isShowEditModal"
       :title="`${modalType == 'add' ? '新增' : '编辑'}用户`"
       @on-ok="modifyConfirm"
@@ -109,6 +111,10 @@ export default {
     // 分页器
     onPageIndexChange (index) {
       this.param.PageIndex = index
+      this.getUserList()
+    },
+    refresh () {
+      this.param.PageIndex = 1
       this.getUserList()
     },
     // 新增
