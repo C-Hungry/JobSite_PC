@@ -5,7 +5,7 @@
         <Input class="w300" type="text" v-model="formData.Title"></Input>
       </FormItem>
       <FormItem label="厂发工资：" prop="SalaryByFactory">
-        <Input class="w150" type="text" v-model="formData.SalaryByFactory">
+        <Input class="w150" type="text" v-model.number="formData.SalaryByFactory">
           <span slot="append">元/时</span>
         </Input>
       </FormItem>
@@ -39,7 +39,9 @@
         </Input>
       </FormItem>
       <FormItem label="关键词：" prop="KeyWords">
-        KeyWords
+        <CheckboxGroup v-model="formData.KeyWordsList">
+          <Checkbox v-for="item in jobKeyWordsList" :key="item.Id" :label="item.Name"></Checkbox>
+        </CheckboxGroup>
       </FormItem>
     </Form>
     <div class="btn-box">
@@ -76,6 +78,7 @@ export default {
         JobDesc: '',
         CompanyDesc: '',
         KeyWords: '',
+        KeyWordsList: [],
         TotalSalary: '',
         CompanyName: '',
         CompanyAddress: ''
@@ -85,7 +88,7 @@ export default {
           { required: true, trigger: 'blur', message: '标题不能为空' }
         ],
         SalaryByFactory: [
-          { required: true, trigger: 'blur', message: '厂发工资不能为空' }
+          { required: true, type: 'number', trigger: 'blur', message: '厂发工资不能为空' }
         ],
         // Images: [
         //   { required: true, trigger: "blur", message: "岗位环境图片不能为空" }
@@ -105,9 +108,9 @@ export default {
         CompanyDesc: [
           { required: true, trigger: 'blur', message: '公司描述不能为空' }
         ],
-        // KeyWords: [
-        //   { required: true, trigger: "blur", message: "关键词不能为空" }
-        // ],
+        KeyWordsList: [
+          { required: true, type: 'array', min: 1, message: '关键词不能为空', trigger: 'change' }
+        ],
         TotalSalary: [
           { required: true, trigger: 'blur', message: '综合月薪不能为空' }
         ],
@@ -147,7 +150,8 @@ export default {
     getJobInfo () {
       getJobInfo({ Id: this.jobId }).then(data => {
         this.formData = data
-        this.formData.Images = data.Images || []
+        this.formData.Images = data.Images || [];
+        this.formData.KeyWordsList = this.formData.KeyWords.split(',');
       })
     },
     // 保存并发布
@@ -160,7 +164,8 @@ export default {
             })
             return
           }
-          addJob(this.formData).then(res => {
+          this.formData.KeyWords = this.formData.KeyWordsList.join(',')
+          updateJob(this.formData).then(res => {
             this.$Notice.success({ title: '岗位新增成功' })
             this.$router.push({
               name: 'jobManage'

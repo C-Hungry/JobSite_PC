@@ -42,7 +42,6 @@ export default {
     handleLogOut ({ state, commit }) {
       return new Promise((resolve, reject) => {
         commit('setToken', '')
-        commit('setAccess', [])
         resolve()
       })
     }

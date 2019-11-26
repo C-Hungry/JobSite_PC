@@ -38,8 +38,10 @@
           <span slot="append">元</span>
         </Input>
       </FormItem>
-      <FormItem label="关键词：" prop="KeyWords">
-        KeyWords
+      <FormItem label="关键词：" prop="KeyWordsList">
+        <CheckboxGroup v-model="formData.KeyWordsList">
+          <Checkbox v-for="item in jobKeyWordsList" :key="item.Id" :label="item.Name"></Checkbox>
+        </CheckboxGroup>
       </FormItem>
     </Form>
     <div class="btn-box">
@@ -74,6 +76,7 @@ export default {
         JobDesc: '',
         CompanyDesc: '',
         KeyWords: '',
+        KeyWordsList: [],
         TotalSalary: '',
         CompanyName: '',
         CompanyAddress: ''
@@ -103,9 +106,9 @@ export default {
         CompanyDesc: [
           { required: true, trigger: 'blur', message: '公司描述不能为空' }
         ],
-        // KeyWords: [
-        //   { required: true, trigger: "blur", message: "关键词不能为空" }
-        // ],
+        KeyWordsList: [
+          { required: true, type: 'array', min: 1, message: '关键词不能为空', trigger: 'change' }
+        ],
         TotalSalary: [
           { required: true, trigger: 'blur', message: '综合月薪不能为空' }
         ],
@@ -131,8 +134,8 @@ export default {
       getJobKeyWordsList({
         PageIndex: 1,
         PageSize: 100
-      }).then(res => {
-        this.jobKeyWordsList = res.Data
+      }).then(data => {
+        this.jobKeyWordsList = data.Data
       })
     },
     // 保存并发布
@@ -145,6 +148,7 @@ export default {
             })
             return
           }
+          this.formData.KeyWords = this.formData.KeyWordsList.join(',')
           addJob(this.formData).then(res => {
             this.$Notice.success({ title: '岗位新增成功' })
             this.$router.push({
@@ -162,7 +166,7 @@ export default {
     }
   },
   mounted () {
-    // this.getJobList()
+    this.getJobKeyWordsList()
   }
 }
 </script>
