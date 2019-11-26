@@ -52,12 +52,12 @@ class HttpRequest {
         return data.Data
       } else if (data.ResponseID == 1) {
         Notice.error({
-          title: data.Message
+          title: data.Message || '网络请求出错，请登录重试'
         })
         return Promise.reject(data)
       } else {
         Notice.error({
-          title: data.Message
+          title: data.Message || '网络请求出错，请登录重试'
         })
         return Promise.reject(data)
       }

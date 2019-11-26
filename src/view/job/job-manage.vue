@@ -46,172 +46,173 @@
   </div>
 </template>
 <script>
-import { getJobList, addJob, updateJob, deleteJob } from "@/api/job";
+import { getJobList, addJob, updateJob, deleteJob } from '@/api/job'
 export default {
-  data() {
+  data () {
     return {
       loading: false,
       isShowEditModal: false,
-      modalType: "add",
+      modalType: 'add',
       param: {
         PageIndex: 1,
         PageSize: 15,
-        Keys: ""
+        Keys: ''
       },
       formData: {
-        Id: "",
-        UserName: "",
-        RealName: "",
-        Phone: ""
+        Id: '',
+        UserName: '',
+        RealName: '',
+        Phone: ''
       },
       userList: [],
       total: 0,
       columns: [
         {
-          title: "标题",
-          slot: "title",
-          minWidth: 100
+          title: '标题',
+          slot: 'title',
+          minWidth: 160
         },
         {
-          title: "厂发工资(元/时)",
-          key: "SalaryByFactory",
+          title: '厂发工资(元/时)',
+          key: 'SalaryByFactory',
           width: 130
         },
         {
-          title: "综合月薪(元)",
-          key: "TotalSalary",
+          title: '综合月薪(元)',
+          key: 'TotalSalary',
           width: 110
         },
         {
-          title: "公司名称",
-          key: "CompanyName",
+          title: '公司名称',
+          key: 'CompanyName',
           width: 130
         },
         {
-          title: "录用条件",
-          key: "EmployCondition",
+          title: '录用条件',
+          key: 'EmployCondition',
           minWidth: 130
         },
         {
-          title: "推荐次数",
-          key: "RecommendNumber",
+          title: '推荐次数',
+          key: 'RecommendNumber',
           width: 90
         },
         {
-          title: "岗位状态",
-          key: "Status",
+          title: '岗位状态',
+          key: 'Status',
           width: 90
         },
         {
-          title: "创建人",
-          key: "UserNameAdded",
+          title: '创建人',
+          key: 'UserNameAdded',
           width: 90
         },
         {
-          title: "创建时间",
-          key: "DateAdded",
+          title: '创建时间',
+          key: 'DateAdded',
           width: 150
         },
         {
-          title: "更新时间",
-          key: "DateModify",
+          title: '更新时间',
+          key: 'DateModify',
           width: 150
         },
         {
-          title: "操作",
-          slot: "action",
+          title: '操作',
+          slot: 'action',
           width: 150,
-          align: "center"
+          fixed: 'right',
+          align: 'center'
         }
       ],
       formRule: {
         UserName: [
-          { required: true, trigger: "blur", message: "岗位名不能为空" }
+          { required: true, trigger: 'blur', message: '岗位名不能为空' }
         ],
         RealName: [
-          { required: true, trigger: "blur", message: "真实姓名不能为空" }
+          { required: true, trigger: 'blur', message: '真实姓名不能为空' }
         ],
         Phone: [
-          { required: true, trigger: "blur", message: "手机号码不能为空" }
+          { required: true, trigger: 'blur', message: '手机号码不能为空' }
         ]
       }
-    };
+    }
   },
   methods: {
     // 获取岗位列表
-    getJobList() {
-      this.loading = true;
+    getJobList () {
+      this.loading = true
       getJobList(this.param)
         .then(res => {
-          this.userList = res.Data;
-          this.total = res.Total;
+          this.userList = res.Data
+          this.total = res.Total
         })
         .finally(() => {
-          this.loading = false;
-        });
+          this.loading = false
+        })
     },
     // 分页器
-    onPageIndexChange(index) {
-      this.param.PageIndex = index;
-      this.getJobList();
+    onPageIndexChange (index) {
+      this.param.PageIndex = index
+      this.getJobList()
     },
-    refresh() {
-      this.param.PageIndex = 1;
-      this.getJobList();
+    refresh () {
+      this.param.PageIndex = 1
+      this.getJobList()
     },
     // 新增
-    add() {
+    add () {
       this.formData = {
-        Id: "",
-        UserName: "",
-        RealName: "",
-        Phone: ""
-      };
-      this.modalType = "add";
-      this.$refs["formCustom"].resetFields();
-      this.isShowEditModal = true;
+        Id: '',
+        UserName: '',
+        RealName: '',
+        Phone: ''
+      }
+      this.modalType = 'add'
+      this.$refs['formCustom'].resetFields()
+      this.isShowEditModal = true
     },
     // 编辑
-    modify(item) {
+    modify (item) {
       this.formData = {
         Id: item.Id,
         UserName: item.UserName,
         RealName: item.RealName,
         Phone: item.Phone
-      };
-      this.modalType = "update";
-      this.$refs["formCustom"].resetFields();
-      this.isShowEditModal = true;
+      }
+      this.modalType = 'update'
+      this.$refs['formCustom'].resetFields()
+      this.isShowEditModal = true
     },
     // 确定编辑
-    modifyConfirm() {
-      this.$refs["formCustom"].validate(valid => {
+    modifyConfirm () {
+      this.$refs['formCustom'].validate(valid => {
         if (valid) {
-          if (this.modalType == "update") {
+          if (this.modalType == 'update') {
             updateJob(this.formData).then(res => {
-              this.$Notice.success({ title: "岗位编辑成功" });
-              this.param.PageIndex = 1;
-              this.getJobList();
-            });
+              this.$Notice.success({ title: '岗位编辑成功' })
+              this.param.PageIndex = 1
+              this.getJobList()
+            })
           } else {
             addJob(this.formData).then(res => {
-              this.$Notice.success({ title: "岗位新增成功" });
-              this.getJobList();
-            });
+              this.$Notice.success({ title: '岗位新增成功' })
+              this.getJobList()
+            })
           }
         }
-      });
+      })
     },
     // 删除岗位
-    del(item) {
+    del (item) {
       deleteJob({ Id: item.Id }).then(res => {
-        this.$Notice.success({ title: "岗位删除成功" });
-        this.getJobList();
-      });
+        this.$Notice.success({ title: '岗位删除成功' })
+        this.getJobList()
+      })
     }
   },
-  mounted() {
-    this.getJobList();
+  mounted () {
+    this.getJobList()
   }
-};
+}
 </script>

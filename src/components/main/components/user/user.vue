@@ -2,7 +2,7 @@
   <div class="user-avatar-dropdown">
     <Dropdown @on-click="handleClick">
       <Avatar icon="ios-person" size="small"/>
-      {{$store.state.user.userName}}
+      {{$store.state.user.userName || '未登录'}}
       <Icon :size="18" type="md-arrow-dropdown"></Icon>
       <DropdownMenu slot="list">
         <DropdownItem name="modifyPassword">修改密码</DropdownItem>
