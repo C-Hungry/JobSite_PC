@@ -19,30 +19,6 @@
       </template>
     </Table>
     <Page class="mt15 fr" :total="total" :current="param.PageIndex" @on-change="onPageIndexChange"></Page>
-    <Modal
-      v-model="isShowEditModal"
-      :title="`${modalType == 'add' ? '新增' : '编辑'}岗位`"
-      @on-ok="modifyConfirm"
-      width="400px"
-    >
-      <Form
-        class="mt20 pr50"
-        ref="formCustom"
-        :model="formData"
-        :rules="formRule"
-        :label-width="120"
-      >
-        <FormItem v-if="modalType == 'add'" label="岗位名：" prop="UserName">
-          <Input type="text" v-model="formData.UserName"></Input>
-        </FormItem>
-        <FormItem label="真实姓名：" prop="RealName">
-          <Input type="text" v-model="formData.RealName"></Input>
-        </FormItem>
-        <FormItem label="手机号码：" prop="Phone">
-          <Input type="text" v-model="formData.Phone"></Input>
-        </FormItem>
-      </Form>
-    </Modal>
   </div>
 </template>
 <script>
@@ -51,18 +27,10 @@ export default {
   data () {
     return {
       loading: false,
-      isShowEditModal: false,
-      modalType: 'add',
       param: {
         PageIndex: 1,
         PageSize: 15,
         Keys: ''
-      },
-      formData: {
-        Id: '',
-        UserName: '',
-        RealName: '',
-        Phone: ''
       },
       userList: [],
       total: 0,
@@ -88,8 +56,8 @@ export default {
           width: 130
         },
         {
-          title: '录用条件',
-          key: 'EmployCondition',
+          title: '公司地址',
+          key: 'CompanyAddress',
           minWidth: 130
         },
         {
@@ -124,18 +92,7 @@ export default {
           fixed: 'right',
           align: 'center'
         }
-      ],
-      formRule: {
-        UserName: [
-          { required: true, trigger: 'blur', message: '岗位名不能为空' }
-        ],
-        RealName: [
-          { required: true, trigger: 'blur', message: '真实姓名不能为空' }
-        ],
-        Phone: [
-          { required: true, trigger: 'blur', message: '手机号码不能为空' }
-        ]
-      }
+      ]
     }
   },
   methods: {
@@ -156,50 +113,23 @@ export default {
       this.param.PageIndex = index
       this.getJobList()
     },
+    // 初始化
     refresh () {
       this.param.PageIndex = 1
       this.getJobList()
     },
     // 新增
     add () {
-      this.formData = {
-        Id: '',
-        UserName: '',
-        RealName: '',
-        Phone: ''
-      }
-      this.modalType = 'add'
-      this.$refs['formCustom'].resetFields()
-      this.isShowEditModal = true
+      this.$router.push({
+        name: 'jobAdd'
+      })
     },
     // 编辑
     modify (item) {
-      this.formData = {
-        Id: item.Id,
-        UserName: item.UserName,
-        RealName: item.RealName,
-        Phone: item.Phone
-      }
-      this.modalType = 'update'
-      this.$refs['formCustom'].resetFields()
-      this.isShowEditModal = true
-    },
-    // 确定编辑
-    modifyConfirm () {
-      this.$refs['formCustom'].validate(valid => {
-        if (valid) {
-          if (this.modalType == 'update') {
-            updateJob(this.formData).then(res => {
-              this.$Notice.success({ title: '岗位编辑成功' })
-              this.param.PageIndex = 1
-              this.getJobList()
-            })
-          } else {
-            addJob(this.formData).then(res => {
-              this.$Notice.success({ title: '岗位新增成功' })
-              this.getJobList()
-            })
-          }
+      this.$router.push({
+        name: 'jobEdit',
+        query: {
+          id: item.Id
         }
       })
     },

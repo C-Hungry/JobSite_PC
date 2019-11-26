@@ -71,58 +71,88 @@ export default [
     name: 'job',
     component: Main,
     meta: {
-      hideInBread: true
+      hideInBread: true,
+      icon: 'md-briefcase',
+      title: '岗位管理'
     },
     children: [
+      {
+        path: 'jobAdd',
+        name: 'jobAdd',
+        meta: {
+          icon: 'md-briefcase',
+          title: '新增岗位'
+        },
+        component: () => import('@/view/job/job-add.vue')
+      },
       {
         path: 'jobManage',
         name: 'jobManage',
         meta: {
           icon: 'md-briefcase',
-          title: '岗位管理'
+          title: '岗位列表'
         },
         component: () => import('@/view/job/job-manage.vue')
-      }
-    ]
-  },
-  {
-    path: '/apply',
-    name: 'apply',
-    component: Main,
-    meta: {
-      hideInBread: true
-    },
-    children: [
+      },
       {
-        path: 'applyManage',
-        name: 'applyManage',
+        path: 'jobEdit',
+        name: 'jobEdit',
         meta: {
-          icon: 'ios-megaphone',
-          title: '报名管理'
+          icon: 'md-briefcase',
+          title: '编辑岗位',
+          hideInMenu: true
         },
-        component: () => import('@/view/apply/apply-manage.vue')
-      }
-    ]
-  },
-  {
-    path: '/registerUser',
-    name: 'registerUser',
-    component: Main,
-    meta: {
-      hideInBread: true
-    },
-    children: [
+        component: () => import('@/view/job/job-edit.vue')
+      },
       {
-        path: 'registerUserManage',
-        name: 'registerUserManage',
+        path: 'jobKeywordsManage',
+        name: 'jobKeywordsManage',
         meta: {
-          icon: 'md-person-add',
-          title: '注册用户管理'
+          icon: 'md-briefcase',
+          title: '关键字管理'
         },
-        component: () => import('@/view/register-user/register-user-manage.vue')
+        component: () => import('@/view/job/job-keywords-manage.vue')
       }
     ]
   },
+  // {
+  //   path: '/apply',
+  //   name: 'apply',
+  //   component: Main,
+  //   meta: {
+  //     hideInBread: true
+  //   },
+  //   children: [
+  //     {
+  //       path: 'applyManage',
+  //       name: 'applyManage',
+  //       meta: {
+  //         icon: 'ios-megaphone',
+  //         title: '报名管理'
+  //       },
+  //       component: () => import('@/view/apply/apply-manage.vue')
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/registerUser',
+  //   name: 'registerUser',
+  //   component: Main,
+  //   meta: {
+  //     hideInBread: true
+  //   },
+  //   children: [
+  //     {
+  //       path: 'registerUserManage',
+  //       name: 'registerUserManage',
+  //       meta: {
+  //         icon: 'md-person-add',
+  //         title: '注册用户管理'
+  //       },
+  //       component: () => import('@/view/register-user/register-user-manage.vue')
+  //     }
+  //   ]
+  // },
   {
     path: '/401',
     name: 'error_401',
