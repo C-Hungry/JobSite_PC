@@ -7,6 +7,18 @@
 	"item": [
 		{
 			"name": "登录",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f018a7fa-4603-452a-84de-8ff5d8cc5bcc",
+						"exec": [
+							"pm.environment.set(\"token\", pm.response.json().Data.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -19,7 +31,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"UserName\":\"admin\",\n\t\"Password\":\"111111\"\n}"
+					"raw": "{\n\t\"UserName\":\"admin\",\n\t\"Password\":\"123456\"\n}"
 				},
 				"url": {
 					"raw": "{{url}}/api/User/Login",
@@ -458,6 +470,66 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "H5设置",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"{{token}}\",\n\t\"TopBanner\":\"aaa\",\n\t\"CategoryIcons\":\"aaa\",\n\t\"CenterBanner\":\"aa\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/H5/H5SetUpAddOrUpdate",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"H5",
+						"H5SetUpAddOrUpdate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "查看h5配置",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"{{token}}\",\n\t\"TopBanner\"::\"aaa\",\n\t\"CategoryIcons\":\"aaa\",\n\t\"CenterBanner\":\"aa\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/H5/H5SetUpAddOrUpdate",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"H5",
+						"H5SetUpAddOrUpdate"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -484,13 +556,13 @@
 	],
 	"variable": [
 		{
-			"id": "abe7e470-52f3-478b-8902-74169f7afb2f",
+			"id": "a946a2ac-9507-4d7d-a0ed-05de5da93b88",
 			"key": "url",
 			"value": "http://192.168.1.234:600",
 			"type": "string"
 		},
 		{
-			"id": "020618a5-bb09-4310-b991-131667cbb229",
+			"id": "e7b66c52-0515-4eba-bdfd-4c150797ca1d",
 			"key": "token",
 			"value": "7ea7f41087794f1292881f419810de30",
 			"type": "string"

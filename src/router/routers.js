@@ -67,6 +67,25 @@ export default [
     ]
   },
   {
+    path: '/website',
+    name: 'website',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'h5HomeManage',
+        name: 'h5HomeManage',
+        meta: {
+          icon: 'md-people',
+          title: 'H5首页设置'
+        },
+        component: () => import('@/view/website/h5-home-manage.vue')
+      }
+    ]
+  },
+  {
     path: '/job',
     name: 'job',
     component: Main,
