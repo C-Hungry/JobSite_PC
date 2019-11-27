@@ -21,7 +21,6 @@
     <Modal
       v-model="isShowEditModal"
       :title="`新增关键字`"
-      @on-ok="modifyConfirm"
       width="400px"
     >
       <Form class="mt20 pr50" ref="formCustom" :model="formData" :rules="formRule" :label-width="120">
@@ -29,6 +28,10 @@
           <Input type="text" v-model="formData.Name"></Input>
         </FormItem>
       </Form>
+      <div slot="footer">
+        <Button size="large" @click="isShowEditModal=false">确定</Button>
+        <Button type="primary" size="large" :loading="modalLoading" :disabled="modalLoading" @click="modifyConfirm">确定</Button>
+      </div>
     </Modal>
   </div>
 </template>
@@ -39,9 +42,10 @@ export default {
     return {
       loading: false,
       isShowEditModal: false,
+      modalLoading: false,
       param: {
         PageIndex: 1,
-        PageSize: 15
+        PageSize: 10
       },
       formData: {
         Id: '',
@@ -84,7 +88,7 @@ export default {
       getJobKeyWordsList(this.param)
         .then(res => {
           this.userList = res.Data
-          this.total = res.Total
+          this.total = res.TotalRows
         })
         .finally(() => {
           this.loading = false
@@ -114,10 +118,14 @@ export default {
     modifyConfirm () {
       this.$refs['formCustom'].validate(valid => {
         if (valid) {
+          this.modalLoading = true;
           addJobKeyWords(this.formData).then(res => {
+            this.isShowEditModal = false;
             this.$Notice.success({ title: '关键字新增成功' })
             this.getJobKeyWordsList()
-          })
+          }).finally(()=> {
+            this.modalLoading = false;
+          });
         }
       })
     },

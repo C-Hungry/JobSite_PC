@@ -39,7 +39,7 @@
         </Input>
       </FormItem>
       <FormItem label="关键词：" prop="KeyWordsList">
-        <CheckboxGroup v-model="formData.KeyWordsList">
+        <CheckboxGroup class="w900" v-model="formData.KeyWordsList">
           <Checkbox v-for="item in jobKeyWordsList" :key="item.Id" :label="item.Name"></Checkbox>
         </CheckboxGroup>
       </FormItem>
