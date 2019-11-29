@@ -65,11 +65,11 @@ export default {
           key: 'RecommendNumber',
           width: 90
         },
-        {
-          title: '岗位状态',
-          key: 'Status',
-          width: 90
-        },
+        // {
+        //   title: '岗位状态',
+        //   key: 'Status',
+        //   width: 90
+        // },
         {
           title: '创建人',
           key: 'UserNameAdded',
