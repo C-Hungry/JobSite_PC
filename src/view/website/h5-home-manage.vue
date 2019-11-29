@@ -61,12 +61,12 @@ export default {
       })
       this.formData.CenterBanner = images
     },
-    // 获取岗位详情
-    getJobInfo () {
-      getJobInfo({ Id: this.jobId }).then(data => {
-        this.formData = data
-        this.formData.Images = data.Images || []
-        this.formData.KeyWordsList = this.formData.KeyWords.split(',')
+    // 获取设置详情
+    getH5HomeInfo () {
+      getH5HomeInfo({ Id: this.jobId }).then(data => {
+        this.formData.TopBanner = data.TopBanner || []
+        this.formData.CategoryIcons = data.CategoryIcons || []
+        this.formData.CenterBanner = data.CenterBanner || []
       })
     },
     // 保存并发布
@@ -90,9 +90,9 @@ export default {
         return
       }
       let data = {
-        TopBanner: this.formData.TopBanner.join(','),
-        CategoryIcons: this.formData.CategoryIcons.join(','),
-        CenterBanner: this.formData.CenterBanner.join(',')
+        TopBanner: this.formData.TopBanner,
+        CategoryIcons: this.formData.CategoryIcons,
+        CenterBanner: this.formData.CenterBanner
       }
       this.loading = true
       h5HomeSet(data).then(res => {
@@ -103,6 +103,7 @@ export default {
     }
   },
   mounted () {
+    this.getH5HomeInfo()
   }
 }
 </script>

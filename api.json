@@ -515,17 +515,47 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"token\":\"{{token}}\",\n\t\"TopBanner\"::\"aaa\",\n\t\"CategoryIcons\":\"aaa\",\n\t\"CenterBanner\":\"aa\"\n}"
+					"raw": "{\n\t\"token\":\"{{token}}\"\n}"
 				},
 				"url": {
-					"raw": "{{url}}/api/H5/H5SetUpAddOrUpdate",
+					"raw": "{{url}}/api/H5/H5SetUpInfo",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"api",
 						"H5",
-						"H5SetUpAddOrUpdate"
+						"H5SetUpInfo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "重置密码",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"{{token}}\",\n\t\"Id\":10\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/User/ResetPasswordByAdmin",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"User",
+						"ResetPasswordByAdmin"
 					]
 				}
 			},
@@ -556,13 +586,13 @@
 	],
 	"variable": [
 		{
-			"id": "a946a2ac-9507-4d7d-a0ed-05de5da93b88",
+			"id": "f2259ad1-c328-4016-8672-141860aca784",
 			"key": "url",
 			"value": "http://192.168.1.234:600",
 			"type": "string"
 		},
 		{
-			"id": "e7b66c52-0515-4eba-bdfd-4c150797ca1d",
+			"id": "7b258396-c9bd-4e14-b610-a082f3a8a988",
 			"key": "token",
 			"value": "7ea7f41087794f1292881f419810de30",
 			"type": "string"

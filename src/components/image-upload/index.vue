@@ -27,7 +27,7 @@
     </Upload>
     <Modal title="查看图片" v-model="visible">
       <img
-        :src="baseUrl + imgName"
+        :src="imgName"
         v-if="visible"
         style="width: 100%"
       />
@@ -52,8 +52,7 @@ export default {
     return {
       defaultList: [],
       imgName: '',
-      visible: false,
-      uploadList: []
+      visible: false
     }
   },
   computed: {
@@ -62,6 +61,16 @@ export default {
     },
     actionUrl () {
       return this.$config.baseUrl.pro + '/api/UploadFile/UploadImage'
+    },
+    uploadList () {
+      let list = []
+      this.defaultImages.length && this.defaultImages.forEach(item => {
+        list.push({
+          name: item,
+          url: item
+        })
+      })
+      return list
     }
   },
   methods: {
@@ -79,7 +88,7 @@ export default {
       if (res.Data && res.Data.length) {
         this.uploadList.push({
           name: res.Data[0],
-          url: this.baseUrl + res.Data[0]
+          url: res.Data[0]
         })
         this.$emit('onUploadChange', this.uploadList)
       }
@@ -99,14 +108,7 @@ export default {
     }
   },
   mounted () {
-    if (this.defaultImages.length) {
-      this.defaultImages.forEach(item => {
-        this.uploadList.push({
-          name: item,
-          url: this.baseUrl + item
-        })
-      })
-    }
+
   }
 }
 </script>

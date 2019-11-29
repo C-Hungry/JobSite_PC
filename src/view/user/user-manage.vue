@@ -7,10 +7,12 @@
     <Table border :columns="columns" :data="userList" :loading="loading">
       <template slot-scope="{ row }" slot="action">
         <Button class="mr5" type="primary" size="small" @click="modify(row)">编辑</Button>
+        <Poptip v-if="$store.getters.isAdmin" confirm transfer placement="top-end" title="确定要重置该用户的密码吗？" @on-ok="resetUserPassword(row)">
+          <Button class="mr5" type="warning" size="small">重置密码</Button>
+        </Poptip>
         <Poptip confirm transfer placement="top-end" title="确定要删除该用户吗？" @on-ok="del(row)">
           <Button type="error" size="small">删除</Button>
         </Poptip>
-        <!-- <Button type="error" size="small" @click="del(row)">删除</Button> -->
       </template>
     </Table>
     <Page class="mt15 fr" :total="total" :current="param.PageIndex" @on-change="onPageIndexChange"></Page>
@@ -44,164 +46,171 @@
   </div>
 </template>
 <script>
-import { getUserList, addUser, updateUser, deleteUser } from "@/api/user";
+import { getUserList, addUser, updateUser, deleteUser, resetUserPassword } from '@/api/user'
 export default {
-  data() {
+  data () {
     return {
       loading: false,
       modalLoading: false,
       isShowEditModal: false,
-      modalType: "add",
+      modalType: 'add',
       param: {
         PageIndex: 1,
         PageSize: 10
       },
       formData: {
-        Id: "",
-        UserName: "",
-        RealName: "",
-        Phone: ""
+        Id: '',
+        UserName: '',
+        RealName: '',
+        Phone: ''
       },
       userList: [],
       total: 0,
       columns: [
         {
-          title: "用户名",
-          key: "UserName"
+          title: '用户名',
+          key: 'UserName'
         },
         {
-          title: "真实姓名",
-          key: "RealName"
+          title: '真实姓名',
+          key: 'RealName'
         },
         {
-          title: "手机号码",
-          key: "Phone"
+          title: '手机号码',
+          key: 'Phone'
         },
         {
-          title: "创建时间",
-          key: "DateAdded"
+          title: '创建时间',
+          key: 'DateAdded'
         },
         {
-          title: "更新时间",
-          key: "DateModify"
+          title: '更新时间',
+          key: 'DateModify'
         },
         {
-          title: "操作",
-          slot: "action",
-          width: 150,
-          fixed: "right",
-          align: "center"
+          title: '操作',
+          slot: 'action',
+          width: this.$store.getters.isAdmin ? 220 : 150,
+          fixed: 'right',
+          align: 'center'
         }
       ],
       formRule: {
         UserName: [
-          { required: true, trigger: "blur", message: "用户名不能为空" }
+          { required: true, trigger: 'blur', message: '用户名不能为空' }
         ],
         RealName: [
-          { required: true, trigger: "blur", message: "真实姓名不能为空" }
+          { required: true, trigger: 'blur', message: '真实姓名不能为空' }
         ],
         Phone: [
           {
             required: true,
             validator: (rule, value, callback) => {
-              if (value === "") {
-                callback(new Error("手机号码不能为空"));
+              if (value === '') {
+                callback(new Error('手机号码不能为空'))
               } else {
                 if (!/^1\d{10}$/.test(value)) {
-                  callback(new Error("手机号码格式正确"));
+                  callback(new Error('手机号码格式正确'))
                 } else {
-                  callback();
+                  callback()
                 }
               }
             },
-            trigger: "blur"
+            trigger: 'blur'
           }
         ]
       }
-    };
+    }
   },
   methods: {
     // 获取用户列表
-    getUserList() {
-      this.loading = true;
+    getUserList () {
+      this.loading = true
       getUserList(this.param)
         .then(res => {
-          this.userList = res.Data;
-          this.total = res.TotalRows;
+          this.userList = res.Data
+          this.total = res.TotalRows
         })
         .finally(() => {
-          this.loading = false;
-        });
+          this.loading = false
+        })
     },
     // 分页器
-    onPageIndexChange(index) {
-      this.param.PageIndex = index;
-      this.getUserList();
+    onPageIndexChange (index) {
+      this.param.PageIndex = index
+      this.getUserList()
     },
-    refresh() {
-      this.param.PageIndex = 1;
-      this.getUserList();
+    refresh () {
+      this.param.PageIndex = 1
+      this.getUserList()
     },
     // 新增
-    add() {
+    add () {
       this.formData = {
-        Id: "",
-        UserName: "",
-        RealName: "",
-        Phone: ""
-      };
-      this.modalType = "add";
-      this.$refs["formCustom"].resetFields();
-      this.isShowEditModal = true;
+        Id: '',
+        UserName: '',
+        RealName: '',
+        Phone: ''
+      }
+      this.modalType = 'add'
+      this.$refs['formCustom'].resetFields()
+      this.isShowEditModal = true
     },
     // 编辑
-    modify(item) {
+    modify (item) {
       this.formData = {
         Id: item.Id,
         UserName: item.UserName,
         RealName: item.RealName,
         Phone: item.Phone
-      };
-      this.modalType = "update";
-      this.$refs["formCustom"].resetFields();
-      this.isShowEditModal = true;
+      }
+      this.modalType = 'update'
+      this.$refs['formCustom'].resetFields()
+      this.isShowEditModal = true
     },
     // 确定编辑
-    modifyConfirm() {
-      this.$refs["formCustom"].validate(valid => {
+    modifyConfirm () {
+      this.$refs['formCustom'].validate(valid => {
         if (valid) {
-          this.modalLoading = true;
-          if (this.modalType == "update") {
+          this.modalLoading = true
+          if (this.modalType == 'update') {
             updateUser(this.formData).then(res => {
-              this.isShowEditModal = false;
-              this.$Notice.success({ title: "用户编辑成功" });
-              this.param.PageIndex = 1;
-              this.getUserList();
-            }).finally(()=> {
-              this.modalLoading = false;
-            });
+              this.isShowEditModal = false
+              this.$Notice.success({ title: '用户编辑成功' })
+              this.param.PageIndex = 1
+              this.getUserList()
+            }).finally(() => {
+              this.modalLoading = false
+            })
           } else {
             addUser(this.formData).then(res => {
-              this.isShowEditModal = false;
-              this.$Notice.success({ title: "用户新增成功" });
-              this.getUserList();
-            }).finally(()=> {
-              this.modalLoading = false;
-            });
+              this.isShowEditModal = false
+              this.$Notice.success({ title: '用户新增成功' })
+              this.getUserList()
+            }).finally(() => {
+              this.modalLoading = false
+            })
           }
         }
-      });
+      })
     },
     // 删除用户
-    del(item) {
+    del (item) {
       deleteUser({ Id: item.Id }).then(res => {
-        this.$Notice.success({ title: "用户删除成功" });
-        this.getUserList();
-      });
+        this.$Notice.success({ title: '用户删除成功' })
+        this.getUserList()
+      })
+    },
+    // 重置密码
+    resetUserPassword (item) {
+      resetUserPassword({ Id: item.Id }).then(res => {
+        this.$Notice.success({ title: '重置密码成功' })
+        this.getUserList()
+      })
     }
   },
-  mounted() {
-    this.getUserList();
+  mounted () {
+    this.getUserList()
   }
-};
+}
 </script>

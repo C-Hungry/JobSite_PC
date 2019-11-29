@@ -1,6 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 import store from '@/store'
+import router from '@/router'
 import { Notice } from 'iview'
 import { getToken } from '@/libs/util'
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded'
@@ -54,11 +55,25 @@ class HttpRequest {
         Notice.error({
           title: data.Message || '网络请求出错，请登录重试'
         })
+        if (data.Message == '登录失败') {
+          store.dispatch('handleLogOut').then(() => {
+            router.push({
+              name: 'login'
+            })
+          })
+        }
         return Promise.reject(data)
       } else {
         Notice.error({
           title: data.Message || '网络请求出错，请登录重试'
         })
+        if (data.Message == '登录失败') {
+          store.dispatch('handleLogOut').then(() => {
+            router.push({
+              name: 'login'
+            })
+          })
+        }
         return Promise.reject(data)
       }
     }, error => {

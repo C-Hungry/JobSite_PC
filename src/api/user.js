@@ -53,3 +53,12 @@ export const deleteUser = (data) => {
     method: 'post'
   })
 }
+
+// 重置密码
+export const resetUserPassword = (data) => {
+  return axios.request({
+    url: '/api/User/ResetPasswordByAdmin',
+    data,
+    method: 'post'
+  })
+}

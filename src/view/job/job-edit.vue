@@ -12,6 +12,16 @@
       <FormItem label="岗位环境图片：" prop="Images">
         <image-upload :defaultImages="formData.Images" @onUploadChange="onUploadChange"></image-upload>
       </FormItem>
+      <FormItem label="综合月薪：" prop="TotalSalary">
+        <Input class="w150" type="text" v-model="formData.TotalSalary">
+          <span slot="append">元</span>
+        </Input>
+      </FormItem>
+      <FormItem label="关键词：" prop="KeyWords">
+        <CheckboxGroup class="w900" v-model="formData.KeyWordsList">
+          <Checkbox v-for="item in jobKeyWordsList" :key="item.Id" :label="item.Name"></Checkbox>
+        </CheckboxGroup>
+      </FormItem>
       <FormItem label="补贴描述：" prop="Allowance">
         <vue-editor style="background: #fff;" class="w900" v-model="formData.Allowance" />
       </FormItem>
@@ -32,16 +42,6 @@
       </FormItem>
       <FormItem label="公司描述：" prop="CompanyDesc">
         <vue-editor style="background: #fff;" class="w900" v-model="formData.CompanyDesc" />
-      </FormItem>
-      <FormItem label="综合月薪：" prop="TotalSalary">
-        <Input class="w150" type="text" v-model="formData.TotalSalary">
-          <span slot="append">元</span>
-        </Input>
-      </FormItem>
-      <FormItem label="关键词：" prop="KeyWords">
-        <CheckboxGroup class="w900" v-model="formData.KeyWordsList">
-          <Checkbox v-for="item in jobKeyWordsList" :key="item.Id" :label="item.Name"></Checkbox>
-        </CheckboxGroup>
       </FormItem>
     </Form>
     <div class="btn-box">
@@ -150,8 +150,8 @@ export default {
     getJobInfo () {
       getJobInfo({ Id: this.jobId }).then(data => {
         this.formData = data
-        this.formData.Images = data.Images || [];
-        this.formData.KeyWordsList = this.formData.KeyWords.split(',');
+        this.formData.Images = data.Images || []
+        this.formData.KeyWordsList = this.formData.KeyWords.split(',')
       })
     },
     // 保存并发布

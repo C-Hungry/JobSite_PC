@@ -1,12 +1,17 @@
 import { login } from '@/api/user'
-import { setToken, getToken, setUserName, getUserName } from '@/libs/util'
+import { setToken, getToken, setAccess, getAccess, setUserName, getUserName } from '@/libs/util'
 
 export default {
   state: {
     userName: getUserName(),
     userId: '',
     token: getToken(),
-    access: ''
+    access: getAccess()
+  },
+  getters: {
+    isAdmin: state => {
+      return state.access == 'admin'
+    }
   },
   mutations: {
     setUserId (state, id) {
@@ -19,6 +24,10 @@ export default {
     setToken (state, token) {
       state.token = token
       setToken(token)
+    },
+    setAccess (state, access) {
+      state.access = access
+      setAccess(access)
     }
   },
   actions: {
@@ -32,6 +41,7 @@ export default {
         }).then(data => {
           commit('setToken', data.token)
           commit('setUserName', data.UserName)
+          commit('setAccess', data.IsAdmin ? 'admin' : '')
           resolve()
         }).catch(err => {
           reject(err)
