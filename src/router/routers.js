@@ -78,7 +78,7 @@ export default [
         path: 'h5HomeManage',
         name: 'h5HomeManage',
         meta: {
-          icon: 'md-people',
+          icon: 'ios-construct',
           title: 'H5首页设置'
         },
         component: () => import('@/view/website/h5-home-manage.vue')
