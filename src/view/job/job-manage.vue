@@ -29,7 +29,7 @@ export default {
       loading: false,
       param: {
         PageIndex: 1,
-        PageSize: 15,
+        PageSize: 10,
         Keys: ''
       },
       userList: [],
@@ -102,7 +102,7 @@ export default {
       getJobList(this.param)
         .then(res => {
           this.userList = res.Data
-          this.total = res.Total
+          this.total = res.TotalRows
         })
         .finally(() => {
           this.loading = false
