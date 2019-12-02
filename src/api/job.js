@@ -36,6 +36,24 @@ export const deleteJob = (data) => {
   })
 }
 
+// 推荐/取消推荐岗位
+export const recommendJob = (data) => {
+  return axios.request({
+    url: '/api/Job/JobRecommend',
+    data,
+    method: 'post'
+  })
+}
+
+// 启用/禁用岗位
+export const forbidJob = (data) => {
+  return axios.request({
+    url: '/api/Job/JobEnabled',
+    data,
+    method: 'post'
+  })
+}
+
 // 查看岗位详情
 export const getJobInfo = (data) => {
   return axios.request({

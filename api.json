@@ -560,6 +560,66 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "岗位--平台推荐",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"{{token}}\",\n\t\"Id\":1//1是0否\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/Job/JobRecommend",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Job",
+						"JobRecommend"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "启用/禁用岗位",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"{{token}}\",\n\t\"Id\":1//1是0否\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/Job/JobEnabled",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Job",
+						"JobEnabled"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -586,13 +646,13 @@
 	],
 	"variable": [
 		{
-			"id": "f2259ad1-c328-4016-8672-141860aca784",
+			"id": "dc7cba6e-0b1d-4f02-9e92-b9371446e55c",
 			"key": "url",
 			"value": "http://192.168.1.234:600",
 			"type": "string"
 		},
 		{
-			"id": "7b258396-c9bd-4e14-b610-a082f3a8a988",
+			"id": "f0f9a220-a69a-4e26-99f1-9ec17d4615d9",
 			"key": "token",
 			"value": "7ea7f41087794f1292881f419810de30",
 			"type": "string"
