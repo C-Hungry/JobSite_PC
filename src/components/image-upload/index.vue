@@ -52,7 +52,8 @@ export default {
     return {
       defaultList: [],
       imgName: '',
-      visible: false
+      visible: false,
+      uploadList: []
     }
   },
   computed: {
@@ -61,16 +62,22 @@ export default {
     },
     actionUrl () {
       return this.$config.baseUrl.pro + '/api/UploadFile/UploadImage'
-    },
-    uploadList () {
-      let list = []
-      this.defaultImages.length && this.defaultImages.forEach(item => {
-        list.push({
-          name: item,
-          url: item
+    }
+  },
+  watch: {
+    defaultImages: {
+      deep: true,
+      handler (newVal) {
+        newVal = newVal || []
+        let list = []
+        newVal.length && newVal.forEach(item => {
+          list.push({
+            name: item,
+            url: item
+          })
         })
-      })
-      return list
+        this.uploadList = list
+      }
     }
   },
   methods: {
