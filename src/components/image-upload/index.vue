@@ -45,7 +45,7 @@ export default {
     },
     maxLength: {
       type: Number,
-      default: 3
+      default: 5
     }
   },
   data () {
