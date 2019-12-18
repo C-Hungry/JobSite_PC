@@ -62,3 +62,21 @@ export const resetUserPassword = (data) => {
     method: 'post'
   })
 }
+
+// 微信用户列表
+export const getWechatUserList = (data) => {
+  return axios.request({
+    url: '/api/User/WechatUserList',
+    data,
+    method: 'post'
+  })
+}
+
+// 导出微信用户列表
+export const exportWechatUserList = (data) => {
+  return axios.request({
+    url: '/api/User/WechatUserListExport',
+    data,
+    method: 'post'
+  })
+}

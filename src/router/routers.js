@@ -52,6 +52,8 @@ export default [
     name: 'user',
     component: Main,
     meta: {
+      icon: 'md-people',
+      title: '用户管理',
       hideInBread: true
     },
     children: [
@@ -60,28 +62,18 @@ export default [
         name: 'userManage',
         meta: {
           icon: 'md-people',
-          title: '用户管理'
+          title: '系统用户'
         },
         component: () => import('@/view/user/user-manage.vue')
-      }
-    ]
-  },
-  {
-    path: '/website',
-    name: 'website',
-    component: Main,
-    meta: {
-      hideInBread: true
-    },
-    children: [
+      },
       {
-        path: 'h5HomeManage',
-        name: 'h5HomeManage',
+        path: 'wxUserManage',
+        name: 'wxUserManage',
         meta: {
-          icon: 'ios-construct',
-          title: 'H5首页设置'
+          icon: 'md-people',
+          title: '微信用户'
         },
-        component: () => import('@/view/website/h5-home-manage.vue')
+        component: () => import('@/view/user/wx-user-manage.vue')
       }
     ]
   },
@@ -131,6 +123,25 @@ export default [
           title: '关键字管理'
         },
         component: () => import('@/view/job/job-keywords-manage.vue')
+      }
+    ]
+  },
+  {
+    path: '/website',
+    name: 'website',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'h5HomeManage',
+        name: 'h5HomeManage',
+        meta: {
+          icon: 'ios-construct',
+          title: 'H5首页设置'
+        },
+        component: () => import('@/view/website/h5-home-manage.vue')
       }
     ]
   },

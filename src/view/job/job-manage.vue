@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="search-box">
-      <Input type="text" v-model="param.Keys" placeholder="请输入关键字" class="w200 mr5"></Input>
+      <Input type="text" v-model="param.Keys" placeholder="关键字" class="w200 mr5"></Input>
       <Button type="primary" icon="md-search" class="mr5" @click="refresh">查询</Button>
       <Button type="warning" icon="md-add" @click="add">新增岗位</Button>
     </div>
