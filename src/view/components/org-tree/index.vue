@@ -23,7 +23,6 @@
 <script>
 import OrgView from './components/org-view.vue'
 import ZoomController from './components/zoom-controller.vue'
-import { getOrgData } from '@/api/data'
 import './index.less'
 const menuDic = {
   edit: '编辑部门',

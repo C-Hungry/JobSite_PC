@@ -6,15 +6,15 @@
       <Button type="info" icon="md-download" @click="exportWechatUserList">导出</Button>
     </div>
     <Table border :columns="columns" :data="userList" :loading="loading">
-      <templete slot-scope="{ row }" slot="Sex">
+      <template slot-scope="{ row }" slot="Sex">
         <span>{{row.Sex == 1 ? '男' : '女'}}</span>
-      </templete>
-      <templete slot-scope="{ row }" slot="Province">
+      </template>
+      <template slot-scope="{ row }" slot="Province">
         <span>{{row.Province + row.City}}</span>
-      </templete>
-      <templete slot-scope="{ row }" slot="BirthDay">
+      </template>
+      <template slot-scope="{ row }" slot="BirthDay">
         <span>{{row.BirthDay && $moment(row.BirthDay).format('YYYY-MM-DD')}}</span>
-      </templete>
+      </template>
     </Table>
     <Page class="mt15 fr" :total="total" :current="param.PageIndex" @on-change="onPageIndexChange"></Page>
   </div>

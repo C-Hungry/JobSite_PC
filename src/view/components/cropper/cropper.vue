@@ -18,7 +18,6 @@
 
 <script>
 import Cropper from '@/components/cropper'
-import { uploadImg } from '@/api/data'
 export default {
   name: 'cropper_page',
   components: {

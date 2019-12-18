@@ -145,6 +145,25 @@ export default [
       }
     ]
   },
+  {
+    path: '/consult',
+    name: 'consult',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'consultManage',
+        name: 'consultManage',
+        meta: {
+          icon: 'ios-construct',
+          title: '咨询管理'
+        },
+        component: () => import('@/view/consult/consult-manage.vue')
+      }
+    ]
+  },
   // {
   //   path: '/apply',
   //   name: 'apply',
