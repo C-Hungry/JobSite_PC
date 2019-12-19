@@ -157,7 +157,7 @@ export default [
         path: 'consultManage',
         name: 'consultManage',
         meta: {
-          icon: 'ios-construct',
+          icon: 'ios-call',
           title: '咨询管理'
         },
         component: () => import('@/view/consult/consult-manage.vue')
