@@ -164,6 +164,25 @@ export default [
       }
     ]
   },
+  {
+    path: '/cashout',
+    name: 'cashout',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'cashOutManage',
+        name: 'cashOutManage',
+        meta: {
+          icon: 'logo-yen',
+          title: '提现管理'
+        },
+        component: () => import('@/view/cashout/cashout-manage.vue')
+      }
+    ]
+  },
   // {
   //   path: '/apply',
   //   name: 'apply',
