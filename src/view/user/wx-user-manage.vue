@@ -107,8 +107,7 @@ export default {
     },
     // 导出
     exportWechatUserList () {
-      exportWechatUserList().then(res => {
-        console.log(res)
+      exportWechatUserList({}).then(res => {
       })
     }
   },
