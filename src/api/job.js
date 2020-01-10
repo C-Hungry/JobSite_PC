@@ -89,3 +89,21 @@ export const deleteJobKeyWords = (data) => {
     method: 'post'
   })
 }
+
+// 设置工作推荐奖励
+export const setSystemConfig = (data) => {
+  return axios.request({
+    url: '/api/Job/SystemConfigSet',
+    data,
+    method: 'post'
+  })
+}
+
+// 获取工作推荐奖励
+export const getSystemConfig = (data) => {
+  return axios.request({
+    url: '/api/Job/SystemConfigGet',
+    data,
+    method: 'post'
+  })
+}

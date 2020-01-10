@@ -183,6 +183,25 @@ export default [
       }
     ]
   },
+  {
+    path: '/system',
+    name: 'system',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'systemConfig',
+        name: 'systemConfig',
+        meta: {
+          icon: 'md-cog',
+          title: '系统配置'
+        },
+        component: () => import('@/view/system/system-config.vue')
+      }
+    ]
+  },
   // {
   //   path: '/apply',
   //   name: 'apply',

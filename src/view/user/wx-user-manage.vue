@@ -17,6 +17,12 @@
       </template>
     </Table>
     <Page class="mt15 fr" :total="total" :current="param.PageIndex" @on-change="onPageIndexChange"></Page>
+
+    <Modal
+        v-model="isShowExcelModal"
+        title="导出">
+        <a class="f14" target="_blank" :href="downloadUrl">导出：微信用户列表</a>
+    </Modal>
   </div>
 </template>
 <script>
@@ -25,6 +31,7 @@ export default {
   data () {
     return {
       loading: false,
+      isShowExcelModal: false,
       param: {
         Keys: '',
         PageIndex: 1,
@@ -32,6 +39,7 @@ export default {
       },
       userList: [],
       total: 0,
+      downloadUrl: '',
       columns: [
         {
           title: '昵称',
@@ -107,7 +115,9 @@ export default {
     },
     // 导出
     exportWechatUserList () {
-      exportWechatUserList({}).then(res => {
+      exportWechatUserList(this.param).then(res => {
+        this.downloadUrl = (process.env.NODE_ENV === 'development' ? this.$config.baseUrl.dev : this.$config.baseUrl.pro) + res
+        this.isShowExcelModal = true
       })
     }
   },
