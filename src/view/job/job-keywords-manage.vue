@@ -29,7 +29,7 @@
         </FormItem>
       </Form>
       <div slot="footer">
-        <Button size="large" @click="isShowEditModal=false">确定</Button>
+        <Button size="large" @click="isShowEditModal=false">取消</Button>
         <Button type="primary" size="large" :loading="modalLoading" :disabled="modalLoading" @click="modifyConfirm">确定</Button>
       </div>
     </Modal>
@@ -118,14 +118,14 @@ export default {
     modifyConfirm () {
       this.$refs['formCustom'].validate(valid => {
         if (valid) {
-          this.modalLoading = true;
+          this.modalLoading = true
           addJobKeyWords(this.formData).then(res => {
-            this.isShowEditModal = false;
+            this.isShowEditModal = false
             this.$Notice.success({ title: '关键字新增成功' })
             this.getJobKeyWordsList()
-          }).finally(()=> {
-            this.modalLoading = false;
-          });
+          }).finally(() => {
+            this.modalLoading = false
+          })
         }
       })
     },

@@ -39,7 +39,7 @@
         </FormItem>
       </Form>
       <div slot="footer">
-        <Button size="large" @click="isShowEditModal=false">确定</Button>
+        <Button size="large" @click="isShowEditModal=false">取消</Button>
         <Button type="primary" size="large" :loading="modalLoading" :disabled="modalLoading" @click="modifyConfirm">确定</Button>
       </div>
     </Modal>
