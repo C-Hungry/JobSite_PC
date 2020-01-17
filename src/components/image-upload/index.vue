@@ -94,8 +94,8 @@ export default {
     handleSuccess (res, file) {
       if (res.Data && res.Data.length) {
         this.uploadList.push({
-          name: res.Data[0],
-          url: res.Data[0]
+          name: res.Data,
+          url: res.Data
         })
         this.$emit('onUploadChange', this.uploadList)
       }
