@@ -81,6 +81,10 @@ export default {
           key: 'InviteUser'
         },
         {
+          title: '余额(元)',
+          key: 'Balance'
+        },
+        {
           title: '创建时间',
           key: 'DateAdded'
         },
